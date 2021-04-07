@@ -45,7 +45,7 @@ const optimizationOption = {
 ```
 
 ### initial
-
+> 동기로 로드하는 모듈 번들링 
    <div style="display: flex">
    <img src="./assets/initial-noname.png" width="450" height="230">   
    <img src="./assets/initial-name.png" width="450" height="230">   
@@ -65,6 +65,7 @@ const optimizationOption = {
   - [name].js: 동기로 불린 `lodash`과 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`
 
 ### async
+> 비동기로 로드하는 모듈 번들링 
 
    <div style="display: flex">
    <img src="./assets/async-noname.png" width="450" height="230">   
@@ -83,6 +84,7 @@ const optimizationOption = {
   - [name].js: 비동기로 불린 `lodash`, `vuex`
 
 ### all
+> 동기, 비동기로 로드하는 모듈 번들링 (async + initial)
 
    <div style="display: flex">
    <img src="./assets/all-noname.png" width="450" height="230">   
