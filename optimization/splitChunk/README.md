@@ -44,7 +44,7 @@ const optimizationOption = {
 }
 ```
 
-#### 1. initial
+### initial
 
    <div style="display: flex">
    <img src="./assets/initial-noname.png" width="450" height="230">   
@@ -64,7 +64,7 @@ const optimizationOption = {
   - 1.js: 비동기로 불린 `vuex`
   - [name].js: 동기로 불린 `lodash`과 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`
 
-#### 2. async
+### async
 
    <div style="display: flex">
    <img src="./assets/async-noname.png" width="450" height="230">   
@@ -82,7 +82,7 @@ const optimizationOption = {
   - b.js: `react`, `react-dom`, 동기로 불린 `lodash`
   - [name].js: 비동기로 불린 `lodash`, `vuex`
 
-#### 3. all
+### all
 
    <div style="display: flex">
    <img src="./assets/all-noname.png" width="450" height="230">   
