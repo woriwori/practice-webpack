@@ -43,85 +43,153 @@ const optimizationOption = {
     }
 }
 ```
-1. initial
-   <img src="./assets/initial-noname.png" width="300" height="300">   
-   ![title](./assets/initial-noname.png){: width="300" height="100"}
-   ![title](./assets/initial-name.png){: width="300" height="100"}
-- name 지정 안한 경우
+#### 1. initial
+   <br><br>
+   <div style="display: flex">
+   <img src="./assets/initial-noname.png" width="450" height="230">   
+   <img src="./assets/initial-name.png" width="450" height="230">   
+   </div>
+   <br>
+   
+- name 지정 안한 경우 (왼쪽 이미지)
   - a.js, b.js: 모듈 번들링 안됨
   - 0.js: 비동기로 불린 `lodash`
   - 1.js: 비동기로 불린 `vuex`
-  - vendors~b.js: 동기로 불린 `lodash` 
-  - vendors~a.js~b.js: 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`
-- name 지정한 경우
+  - vendors\~b.js: 동기로 불린 `lodash` 
+  - vendors\~a.js\~b.js: 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`
+- name 지정한 경우 (오른쪽 이미지)
   - a.js, b.js: 모듈 번들링 안됨
   - 0.js: 비동기로 불린 `lodash`
   - 1.js: 비동기로 불린 `vuex`
   - [name].js: 동기로 불린 `lodash`과 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`
-로
-2. async
-- name 지정 안한 경우
+
+#### 2. async
+   <br><br>
+   <div style="display: flex">
+   <img src="./assets/async-noname.png" width="450" height="230">   
+   <img src="./assets/async-name.png" width="450" height="230">   
+   </div>
+   <br>
+   
+- name 지정 안한 경우 (왼쪽 이미지)
   - a.js: `react`, `react-dom`
   - b.js: `react`, `react-dom`, 동기로 불린 `lodash`
   - 0.js: 비동기로 불린 `lodash`
   - 1.js: 비동기로 불린 `vuex`
-- name 지정한 경우
+- name 지정한 경우 (오른쪽 이미지)
   - a.js: `react`, `react-dom`
   - b.js: `react`, `react-dom`, 동기로 불린 `lodash`
   - [name].js: 비동기로 불린 `lodash`, `vuex`
 
-3. all
-- name 지정 안한 경우
+#### 3. all
+   <br><br>
+   <div style="display: flex">
+   <img src="./assets/all-noname.png" width="450" height="230">   
+   <img src="./assets/all-name.png" width="450" height="230">   
+   </div>
+   <br>
+   
+- name 지정 안한 경우 (왼쪽 이미지)
   - a.js, b.js: 모듈 번들링 안됨
   - 0.js: 둘 다에서 동기, 비동기로 불린 `lodash`
   - 1.js: 비동기로 불린 `vuex`
-  - vendors~a.js~b.js: 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`
-- name 지정한 경우
+  - vendors\~a.js\~b.js: 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`
+- name 지정한 경우 (오른쪽 이미지)
   - a.js, b.js: 모듈 번들링 안됨
   - [name].js: 둘 다에서 동기, 비동기로 불린 `react`, `react-dom`, `lodash`, `vuex` 
 
-### Webconsole 의 경우..
-- client.js
-  - output 파일 
-  - client/ 하위의 모든 코드가 번들링됨
-  - assets, store 등 (옵션에 따라 node_modules도 포함됨)
-- vendor~client
-  - `name` 옵션을 지정하지 않은 경우, `client.js`에서 `node_modules`만 번들링
-- 그 외
-  - 비동기로 불리는 모듈들이 각각 번들링
-- `name` 옵션을 지정한 경우
-  - (vendor~client + 그 외)가 번들링
+> ### Webconsole 의 경우..
+> <details>
+> <summary style="font-Weight : bold;" >정리</summary>
+> <div>  
+> <br>
+>   <b>1. client.js</b>
+>   <ul>
+>       <li>output 파일</li>
+>       <li>client/ 하위의 모든 코드가 번들링됨</li>
+>       <li>assets, store 등 (옵션에 따라 node_modules도 포함됨)</li>
+>   </ul>
+>   <b>2. vendor~client</b>
+>   <ul>
+>       <li>name 옵션을 지정하지 않은 경우, client.js의 node_modules만 번들링</li>
+>   </ul>
+>   <b>3. 그 외</b>
+>   <ul>
+>       <li>비동기로 불리는 모듈들이 각각 번들링</li>
+>   </ul>
+>   <b>4. name 옵션을 지정한 경우</b>
+>   <ul>
+>       <li>(vendor~client + 그 외)가 번들링</li>
+>   </ul>
+> </div>
+> </details>
+> <details>
+>   <summary style="font-Weight : bold;" >옵션 별 비교</summary>
+>   <div>  
+>       <details>
+>           <summary style="font-Weight : bold;" >initial</summary>
+>               <div>  
+>                   <b>1. name 없을 때</b>
+>                   <ul>
+>                       <li>clients.js: 2.1mb => assets, store 등</li>
+>                       <li>vendors~client : 9.2mb => node_modules</li>
+>                   </ul>
+>                   <b>2. name 없을 때</b>
+>                   <ul>
+>                       <li>위와 동일</li>
+>                   </ul>
+>               </div>
+>       </details>
+>       <details>
+>           <summary style="font-Weight : bold;" >async</summary>
+>               <div>  
+>                   <b>1. name 없을 때</b>
+>                   <ul>
+>                       <li>client.js: 11.4mb => node_modules, assets, store 등</li>
+>                       <li>
+>                           나머지 엄청 여러개 생성
+>                           <br> 
+>                           -> 라우터 코드 스플리팅으로 비동기로 불리는 애들에서 공통으로 import 되는 모듈들만 뽑아서 생성됨
+>                       </li>                      
+>                   </ul>
+>                   <b>2. name 없을 때</b>
+>                   <ul>
+>                       <li>client.js: 11.3mb</li>
+>                       <li>
+>                           vendors: 5.6mb
+>                           <br> 
+>                           -> 나머지 엄청 여러개를 합친 것보다 크다.
+>                       </li>
+>                   </ul>
+>               </div>
+>       </details>
+>       <details>
+>           <summary style="font-Weight : bold;" >all</summary>
+>               <div>  
+>                   <b>1. name 없을 때</b>
+>                   <ul>
+>                       <li>clients.js: 2.2mb => assets, store 등</li>
+>                       <li>vendors~client : 9.2mb => node_modules</li>
+>                       <li>
+>                           나머지 엄청 여러개 생성
+>                           <br> 
+>                           -> 라우터 코드 스플리팅으로 비동기로 불리는 애들에서 공통으로 import 되는 모듈들만 뽑아서 생성됨
+>                           <br> 
+>                           -> 근데.. 2개 이하에서 import되는 모듈들은 안뽑아주는거 같고.. 이름 지정하면 걔네까지 다 뽑힘 
+>                           <br> 
+>                           -> 그래서 이 나머지 + vendors~client 의 크기보다 vendors의 크기가 더 크다.
+>                       </li>     
+>                   </ul>
+>                   <b>2. name 없을 때</b>
+>                   <ul>
+>                       <li>client.js: 2.1mb</li>
+>                       <li>vendors: 14.7mb</li>
+>                   </ul>
+>               </div>
+>       </details>
+>   </div>
+> </details>
 
-1. initial
-- name X
-  - clients.js: 2.1mb => assets, store 등
-  - vendors~client : 9.2mb => node_modules
-- name O
-  - 위와 동일
-
-2. async
-- name X
-  - client.js: 11.4mb => node_modules, assets, store 등
-  - 나머지 엄청 여러개 생성
-    - 라우터 코드 스플리팅으로 비동기로 불리는 애들에서 공통으로 import 되는 모듈들만 뽑아서 생성됨.
-- name O
-  - client.js: 11.3mb
-  - vendors: 5.6mb
-    - 나머지 엄청 여러개를 합친 것보다 크다.
-  
-
-3. all
-- name X
-  - client.js : 2.2mb => assets, store 등
-  - vendors~client : 9.2mb => node_modules
-  - 나머지 엄청 여러개 
-    - 라우터 코드 스플리팅으로 비동기로 불리는 애들에서 공통으로 import 되는 모듈들만 뽑아서 생성됨.
-    - 근데.. 2개 이하에서 import되는 모듈들은 안뽑아주는거 같고.. 이름 지정하면 걔네까지 다 뽑힘 
-    - 그래서 이 나머지 + vendors~client 의 크기보다 vendors의 크기가 더 크다.
-- name O
-  - client.js: 2.1mb
-  - vendors: 14.7mb
-  
 
 ---
 ### 참고 링크
