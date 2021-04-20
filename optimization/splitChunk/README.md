@@ -13,12 +13,25 @@
 - `cacheGroups`의 옵션으로도 가능
 - `name` 옵션을 줄 경우 하나의 청크 파일로 생성된다.
   - `production 모드`에서 `name` 옵션을 추천
+  
+## minSize
+- chunk를 생성할 최소 사이즈
 
+## cacheGroups
+- splitChunk의 옵션을 모두 오버라이딩함
+- `test`, `priority`, `reuseExistingChunk` 이 3개의 옵션은 `cacheGroups`에만 존재
 
 ## chunks
 - initial / async (default) / all
 - 비동기로 불리는 모듈은 옵션과 상관없이 항상 번들링된다. (async 옵션과 동작이 동일)
   - 단, `entry 파일들`끼리 **공통으로 가져오는 모듈**인 경우 `chunks 옵션`의 영향을 받는다.
+ 
+|   | A.js  | B.js  |
+|---|---|---|
+| lodash  | 비동기  | 동기  | 
+|  vuex |  비동기 | X  |
+|  react |  비동기 | 비동기  |
+|  react-dom |  동기 | 동기  |
 
 ```javascript
 // A.js
